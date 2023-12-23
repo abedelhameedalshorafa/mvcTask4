@@ -1,0 +1,19 @@
+﻿@using Newtonsoft.Json
+@{
+    string? userJson = ViewContext.HttpContext.Session.GetString("LiveUser");
+    User? user = JsonConvert.DeserializeObject<User>(userJson);
+}
+
+<div style="text-align:center;">
+    <h1> Hello @user.FirstName @user.LastName </h1>
+
+    @{
+        if (user.Role == Role.Manager)
+        {
+            <a type="button" class="btn btn-primary btn-lg"
+               style="padding-left: 2.5rem; padding-right: 2.5rem; text-align:center;" asp-controller="Manager" asp-action="Display">
+                Display Employees
+            </a>
+        }
+    }
+</div>
